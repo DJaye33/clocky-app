@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+:root {
+  --color-primary-pure-black: #000000;
+  --color-primary-near-black-grey: #303030;
+
+  --color-secondary-pure-white: #ffffff;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-image: url("/assets/mobile/bg-image-nighttime.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  height: 100vh;
+}
+
+p {
+  color: var(--color-secondary-pure-white);
+}
+.main {
+  padding: 3rem 2.5rem 4rem;
+  max-width: 57.3rem;
+}
+
+.quote {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.quote-text {
+  font-size: 1.2rem;
+  line-height: 2.2rem;
+  text-align: left;
+  margin-bottom: 0.8rem;
+}
+
+.quote-author {
+  display: block;
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 2.2rem;
+  text-align: left;
+}
