@@ -47,6 +47,14 @@ p {
   max-width: 57.3rem;
 }
 
+.hidequote {
+  animation: hidequote 1s ease-out forwards;
+}
+
+.showquote {
+  animation: showquote 1s ease-out forwards;
+}
+
 .quote {
   display: flex;
   justify-content: space-between;
@@ -54,19 +62,26 @@ p {
   margin-bottom: 22.7rem;
 }
 
-.quote-animation {
-  animation: hidequote 1s ease-out forwards;
-}
-
 @keyframes hidequote {
   0% {
     opacity: 1;
     margin-bottom: 22.7rem;
   }
-
   100% {
     opacity: 0;
     margin-bottom: -9.5rem;
+  }
+}
+
+@keyframes showquote {
+  0% {
+    opacity: 0;
+    margin-bottom: -9.5rem;
+  }
+
+  100% {
+    opacity: 1;
+    margin-bottom: 22.7rem;
   }
 }
 
@@ -179,6 +194,18 @@ p {
   border-radius: 2.8rem;
 }
 
+.toggle-arrow {
+  transition: 0.5s;
+}
+
+.rotate {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
 .slide-up {
   height: 0%;
   width: 100%;
@@ -189,7 +216,7 @@ p {
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(4rem);
   overflow-x: hidden;
-  transition: 1.5s;
+  transition: 1s;
 }
 
 .toggleSlide {
@@ -203,6 +230,10 @@ p {
   height: 16rem;
   padding: 4.8rem 2.6rem;
   overflow: hidden;
+}
+
+.changeText {
+  content: "Less";
 }
 
 .slide-up-text p {
