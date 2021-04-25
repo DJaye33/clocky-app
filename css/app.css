@@ -27,6 +27,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: bottom;
+  padding: 3rem 2.5rem 4rem;
   height: 100vh;
   overflow: hidden;
 }
@@ -43,7 +44,6 @@ p {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  padding: 3rem 2.5rem 4rem;
   max-width: 57.3rem;
 }
 
@@ -155,4 +155,49 @@ p {
   outline: none;
   background-color: var(--color-secondary-pure-white);
   border-radius: 2.8rem;
+}
+
+.popup {
+  height: 40%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(4rem);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.popup-text {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 16rem;
+  padding: 4.8rem 2.6rem;
+}
+
+.popup-text p {
+  font-size: 1rem;
+  line-height: 2.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  color: var(--color-primary-near-black-grey);
+}
+
+.popup-text h3 {
+  font-size: 2rem;
+  line-height: 2.4rem;
+  text-align: right;
+  color: var(--color-primary-near-black-grey);
+}
+
+.time-zone,
+.time-year,
+.time-week,
+.time-number {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
