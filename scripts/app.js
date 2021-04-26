@@ -4,7 +4,58 @@ const quote = document.querySelector(".quote");
 const timer = document.querySelector(".timer");
 const toggleArrow = document.querySelector(".toggle-arrow");
 const toggleText = document.querySelector(".toggle-text");
+const timeZone = document.querySelector(".time-zone-title");
+const timeYear = document.querySelector(".time-year-title");
+const timeWeek = document.querySelector(".time-week-title");
+const timeNumber = document.querySelector(".time-number-title");
 
+// Request World Time
+const getWorldTime = () => {
+  fetch("http://worldtimeapi.org/api/ip")
+    .then((response) => response.json())
+    .then((data) => {
+      timeZone.textContent = data.timezone;
+      timeYear.textContent = data.day_of_year;
+      timeNumber.textContent = data.week_number;
+
+      convertDayOfWeek(data.day_of_week);
+      console.log(data);
+    })
+    .catch(console.error);
+};
+
+getWorldTime();
+
+// Converts day of week number "0" to english "Sunday"
+function convertDayOfWeek(number) {
+  switch (number) {
+    case 0:
+      timeWeek.textContent = "Sunday";
+      break;
+    case 1:
+      timeWeek.textContent = "Monday";
+      break;
+    case 2:
+      timeWeek.textContent = "Tuesday";
+      break;
+    case 3:
+      timeWeek.textContent = "Wednesday";
+      break;
+    case 4:
+      timeWeek.textContent = "Thursday";
+      break;
+    case 5:
+      timeWeek.textContent = "Friday";
+      break;
+    case 6:
+      timeWeek.textContent = "Saturday";
+      break;
+    default:
+      timeWeek.textContent = "N/A";
+  }
+}
+
+// Slide Animations
 const showMore = () => {
   slideMenu.classList.add("toggleSlide");
   quote.classList.remove("showquote");
@@ -32,8 +83,8 @@ const toggler = () => {
     showMore();
   } else {
     showLess();
-    console.log("Create slide down function");
   }
 };
 
 toggleBtn.addEventListener("click", toggler);
+// End Slide Animations
