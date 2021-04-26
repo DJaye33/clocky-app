@@ -127,6 +127,7 @@ p {
   display: flex;
   align-items: center;
   font-size: 10rem;
+  font-weight: 400;
   line-height: 10rem;
   letter-spacing: -0.25rem;
   margin-right: 1.3rem;

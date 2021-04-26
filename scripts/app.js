@@ -8,16 +8,17 @@ const timeZone = document.querySelector(".time-zone-title");
 const timeYear = document.querySelector(".time-year-title");
 const timeWeek = document.querySelector(".time-week-title");
 const timeNumber = document.querySelector(".time-number-title");
+const clockZone = document.querySelector(".clock-zone");
+const clockHour = document.querySelector(".clock-hour");
+const clockMinutes = document.querySelector(".clock-minutes");
 
 // Request World Time
 const getWorldTime = () => {
   fetch("http://worldtimeapi.org/api/ip")
     .then((response) => response.json())
     .then((data) => {
-      timeZone.textContent = data.timezone;
-      timeYear.textContent = data.day_of_year;
-      timeNumber.textContent = data.week_number;
-
+      slideAppData(data.timezone, data.day_of_year, data.week_number);
+      getHoursMinutes(data.utc_datetime, data.abbreviation);
       convertDayOfWeek(data.day_of_week);
       console.log(data);
     })
@@ -25,6 +26,32 @@ const getWorldTime = () => {
 };
 
 getWorldTime();
+
+function slideAppData(timezone, dayofyear, weeknumber) {
+  timeZone.textContent = timezone;
+  timeYear.textContent = dayofyear;
+  timeNumber.textContent = weeknumber;
+}
+
+function getHoursMinutes(datetime, abbreviation) {
+  const myDate = new Date(datetime);
+  const hour = myDate.getHours();
+  const minutes = myDate.getMinutes();
+
+  if (hour <= 9) {
+    clockHour.textContent = `0${hour}`;
+  } else {
+    clockHour.textContent = hour;
+  }
+
+  if (minutes <= 9) {
+    clockMinutes.textContent = `0${minutes}`;
+  } else {
+    clockMinutes.textContent = minutes;
+  }
+
+  clockZone.textContent = abbreviation;
+}
 
 // Converts day of week number "0" to english "Sunday"
 function convertDayOfWeek(number) {
