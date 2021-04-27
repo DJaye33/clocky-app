@@ -14,38 +14,48 @@ const clockMinutes = document.querySelector(".clock-minutes");
 const quoteText = document.querySelector(".quote-text");
 const quoteAuthor = document.querySelector(".quote-author");
 const quoteRefresh = document.querySelector(".quote img");
+const locationCity = document.querySelector(".location-city");
+const city = document.querySelector(".city");
+const state = document.querySelector(".state");
+const moon = document.querySelector(".moon");
+const sun = document.querySelector(".sun");
+const dayType = document.querySelector(".day-type-text");
 
 const getRandomQuote = () => {
+  quoteRefresh.classList.add("rotate");
   fetch("https://api.quotable.io/random")
     .then((response) => response.json())
     .then((data) => {
       quoteText.textContent = data.content;
       quoteAuthor.textContent = data.author;
-      console.log(data);
     })
     .catch((err) => {
       console.log(err);
     });
+
+  setTimeout(function () {
+    quoteRefresh.classList.remove("rotate");
+  }, 500);
 };
 
 // Request World Time
 const getWorldTime = () => {
-  fetch("http://worldtimeapi.org/api/ip")
+  fetch("https://worldtimeapi.org/api/ip")
     .then((response) => response.json())
     .then((data) => {
       slideAppData(data.timezone, data.day_of_year, data.week_number);
       getHoursMinutes(data.utc_datetime, data.abbreviation);
       convertDayOfWeek(data.day_of_week);
-      console.log(data);
     })
     .catch(console.error);
 };
 
 const getCityCountry = () => {
-  fetch("https://freegeoip.app/json")
+  fetch("https://freegeoip.app/json/")
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      city.textContent = data.city;
+      state.textContent = data.region_code;
     })
     .catch((err) => {
       console.log(err);
@@ -54,7 +64,7 @@ const getCityCountry = () => {
 
 getRandomQuote();
 getWorldTime();
-// getCityCountry();
+getCityCountry();
 
 function slideAppData(timezone, dayofyear, weeknumber) {
   timeZone.textContent = timezone;
@@ -66,6 +76,8 @@ function getHoursMinutes(datetime, abbreviation) {
   const myDate = new Date(datetime);
   const hour = myDate.getHours();
   const minutes = myDate.getMinutes();
+
+  getGreeting(hour);
 
   if (hour <= 9) {
     clockHour.textContent = `0${hour}`;
@@ -81,6 +93,24 @@ function getHoursMinutes(datetime, abbreviation) {
 
   clockZone.textContent = abbreviation;
 }
+
+function getGreeting(time) {
+  if (time >= 5 && time < 12) {
+    dayType.textContent = "Good Morning";
+  } else if (time >= 12 && time < 18) {
+    dayType.textContent = "Good Afternoon";
+  } else if (time >= 18 && time <= 24) {
+    dayType.textContent = "Good Evening";
+    sun.classList.add("inactive");
+    moon.classList.remove("inactive");
+    body.style.background = "url('/assets/mobile/bg-image-nigthttime.jpg')";
+  } else {
+    dayType.textContent = "Good Evening";
+    body.style.background = "url('/assets/mobile/bg-image-nigthttime.jpg')";
+  }
+}
+
+// getGreeting();
 
 // Converts day of week number "0" to english "Sunday"
 function convertDayOfWeek(number) {
@@ -118,10 +148,8 @@ const showMore = () => {
   quote.classList.add("hidequote");
   toggleArrow.classList.add("rotate");
   toggleText.textContent = "Less";
-
-  setTimeout(function () {
-    quote.style.display = "none";
-  }, 1000);
+  timer.classList.remove("timer-down");
+  timer.classList.add("move-timer");
 };
 
 const showLess = () => {
@@ -132,9 +160,11 @@ const showLess = () => {
   quote.classList.add("showquote");
   toggleArrow.classList.remove("rotate");
   toggleText.textContent = "more";
+  timer.classList.remove("move-timer");
+  timer.classList.add("timer-down");
 };
 
-const toggler = () => {
+const togglerText = () => {
   if (toggleText.textContent === "more") {
     showMore();
   } else {
@@ -142,5 +172,6 @@ const toggler = () => {
   }
 };
 
-toggleBtn.addEventListener("click", toggler);
+quoteRefresh.addEventListener("click", getRandomQuote);
+toggleBtn.addEventListener("click", togglerText);
 // End Slide Animations

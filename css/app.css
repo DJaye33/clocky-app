@@ -40,11 +40,15 @@ p {
   display: none;
 }
 
+.rotate {
+  transform: rotate(360deg);
+}
+
 .main {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  max-width: 57.3rem;
+  /* max-width: 57.3rem; */
 }
 
 .hidequote {
@@ -55,34 +59,34 @@ p {
   animation: showquote 1s ease-out forwards;
 }
 
+.quote-wrapper {
+  max-width: 57.3rem;
+}
+
 .quote {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  min-height: 9.6rem;
+  height: 9.6rem;
   margin-bottom: 22.7rem;
 }
 
 @keyframes hidequote {
   0% {
     opacity: 1;
-    margin-bottom: 22.7rem;
   }
   100% {
     opacity: 0;
-    margin-bottom: -9.5rem;
   }
 }
 
 @keyframes showquote {
   0% {
     opacity: 0;
-    margin-bottom: -9.5rem;
   }
 
   100% {
     opacity: 1;
-    margin-bottom: 22.7rem;
   }
 }
 
@@ -101,8 +105,39 @@ p {
   text-align: left;
 }
 
+.quote img {
+  transition: transform 0.3s;
+}
+
 .quote img:hover {
   cursor: pointer;
+}
+
+.move-timer {
+  animation: moveUp 1s ease-out forwards;
+}
+
+.timer-down {
+  animation: moveDown 1.3s ease-out forwards;
+}
+
+@keyframes moveUp {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-82%);
+  }
+}
+
+@keyframes moveDown {
+  0% {
+    transform: translateY(-82%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
 }
 
 .day-type {
@@ -156,7 +191,7 @@ p {
   letter-spacing: 0.3rem;
   color: var(--color-secondary-pure-white);
   text-transform: uppercase;
-  margin-bottom: 4.8rem;
+  margin-bottom: 2.5rem;
 }
 
 .toggle {
@@ -218,7 +253,7 @@ p {
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(4rem);
   overflow-x: hidden;
-  transition: 1s;
+  transition: 1.3s;
 }
 
 .toggleSlide {
@@ -260,4 +295,10 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+@media screen and (min-width: 375px) {
+  .quote-text {
+    width: 28rem;
+  }
 }
