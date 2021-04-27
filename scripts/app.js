@@ -11,6 +11,22 @@ const timeNumber = document.querySelector(".time-number-title");
 const clockZone = document.querySelector(".clock-zone");
 const clockHour = document.querySelector(".clock-hour");
 const clockMinutes = document.querySelector(".clock-minutes");
+const quoteText = document.querySelector(".quote-text");
+const quoteAuthor = document.querySelector(".quote-author");
+const quoteRefresh = document.querySelector(".quote img");
+
+const getRandomQuote = () => {
+  fetch("https://api.quotable.io/random")
+    .then((response) => response.json())
+    .then((data) => {
+      quoteText.textContent = data.content;
+      quoteAuthor.textContent = data.author;
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 // Request World Time
 const getWorldTime = () => {
@@ -25,7 +41,20 @@ const getWorldTime = () => {
     .catch(console.error);
 };
 
+const getCityCountry = () => {
+  fetch("https://freegeoip.app/json")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+getRandomQuote();
 getWorldTime();
+// getCityCountry();
 
 function slideAppData(timezone, dayofyear, weeknumber) {
   timeZone.textContent = timezone;

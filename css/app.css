@@ -59,6 +59,7 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  min-height: 9.6rem;
   margin-bottom: 22.7rem;
 }
 
