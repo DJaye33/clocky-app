@@ -103,10 +103,12 @@ function getGreeting(time) {
     dayType.textContent = "Good Evening";
     sun.classList.add("inactive");
     moon.classList.remove("inactive");
-    body.style.background = "url('/assets/mobile/bg-image-nigthttime.jpg')";
+    document.body.style.backgroundImage =
+      'url("/assets/mobile/bg-image-nighttime.jpg")';
   } else {
     dayType.textContent = "Good Evening";
-    body.style.background = "url('/assets/mobile/bg-image-nigthttime.jpg')";
+    document.body.style.backgroundImage =
+      'url("/assets/mobile/bg-image-nighttime.jpg")';
   }
 }
 
